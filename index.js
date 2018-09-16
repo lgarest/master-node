@@ -48,8 +48,7 @@ function unifiedServer(request, response) {
 
   request
     // Triggered every time we receive data from the stream
-    .on('data', payloadChunk =>
-      payloadBuffer += decoder.write(payloadChunk))
+    .on('data', payloadChunk => payloadBuffer += decoder.write(payloadChunk))
 
     // Triggered only at the end of the stream
     .on('end', () => {
