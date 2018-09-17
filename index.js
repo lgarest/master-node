@@ -7,8 +7,10 @@ const fs = require('fs')
 const path = require('path')
 
 /* Relative imports */
-const Config = require('./config')
-const Router = require('./router')
+const Config = require('./lib/config')
+const Router = require('./lib/router')
+const Handlers = require('./lib/handlers')
+const Helpers = require('./lib/helpers')
 
 
 // Instantiating the HTTP server
@@ -59,7 +61,7 @@ function unifiedServer(request, response) {
         queryStrObject: parseUrl.query,
         method: request.method.toLowerCase(),
         headers: request.headers,
-        payload: payloadBuffer
+        payload: Helpers.parseJsonToObject(payloadBuffer)
       }
 
       // Route the request to the router
@@ -67,47 +69,8 @@ function unifiedServer(request, response) {
     })
 }
 
-// Define the route handlers
-const Handlers = {
-  hello: (data, callback) => callback(200, { msg: 'Hello world!' }),
-  ping: (data, callback) => callback(200),
-  notFound: (_, callback) => callback(404),
-}
-
-/* Why not functional?
-[
-  ['hello', Handlers.hello],
-  ['ping', Handlers.ping],
-  ['404', Handlers.notFound],
-].map(([url, view]) => Router.url(url, view))
-*/
-
 // Connect the urls with the views handling the request
 Router.url('hello', Handlers.hello)
 Router.url('ping', Handlers.ping)
+Router.url('users', Handlers.users)
 Router.url('404', Handlers.notFound)
-
-/* Testing the server with curl commands
-
-  > curl\
-    --header 'Content-Type: application/json'\
-    localhost:3000/ping
-
-  < Response 200 {}
-
-
-  > curl\
-    --header 'Content-Type: application/json'\
-    --data '{}'\
-    localhost:3000/hello
-
-  < Response 200 {"msg":"Hello world!"}
-
-
-  > curl\
-    --header 'Content-Type: application/json'\
-    --data '{ "enjoying": "the course" }'\
-    localhost:3000/inexistent
-
-  < Response 404 {}
- */
