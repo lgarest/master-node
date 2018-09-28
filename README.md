@@ -1,6 +1,8 @@
 [Pirple's](https://pirple.thinkific.com/courses/take/the-nodejs-master-class) master node course
 ===========================
 
+[![Join the chat at https://gitter.im/master-node/Lobby](https://badges.gitter.im/master-node/Lobby.svg)](https://gitter.im/master-node/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Homework Assignment #1
 
 How to Turn It In:
