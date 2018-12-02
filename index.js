@@ -75,4 +75,5 @@ function unifiedServer(request, response) {
 Router.url('hello', Handlers.hello)
 Router.url('ping', Handlers.ping)
 Router.url('users', Handlers.users)
+Router.url('tokens', Handlers.tokens)
 Router.url('404', Handlers.notFound)

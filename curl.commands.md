@@ -1,7 +1,6 @@
-Test the server with the following curl commands
-==
+# Test the server with the following curl commands
 
-Default endpoints
+## Default endpoints
 
 - Ping
   ```
@@ -30,9 +29,9 @@ Default endpoints
   ```
   `< 404: {}`
 
-REST endpoints
+## REST endpoints
 
-+ Users
+### Users
 
   **POST** request
   ```
@@ -47,7 +46,6 @@ REST endpoints
     "lastName": "G",
     "phone": "0123456789",
   }
-
   ```
 
   **GET** request
@@ -82,4 +80,38 @@ REST endpoints
    --request DELETE\
    localhost:3000/users?phone=0123456789
   ```
-  `< 200: {}`
+  ```
+  < 200: {}
+  ```
+
+---
+### Tokens
+
+  **POST** request
+  ```
+  curl\
+    --header 'Content-Type: application/json'\
+    --data '{"firstName":"Luis","lastName":"G","phone":"0123456789","password":"hello","tosAgreement":true}'\
+    localhost:3000/tokens
+  ```
+  ```
+  < 200: {
+    "id":"8fvgomx7qqr05gbbeage",
+    "phone":"0123456789",
+    "expires":1543773407346
+  }
+  ```
+
+  **GET** request
+  ```
+  curl\
+    --header 'Content-Type: application/json'\
+    localhost:3000/tokens?id=8fvgomx7qqr05gbbeage
+  ```
+  ```
+  < 200: {
+    "id":"8fvgomx7qqr05gbbeage",
+    "phone":"0123456789",
+    "expires":1543773407346
+  }
+  ```
