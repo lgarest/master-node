@@ -18,6 +18,7 @@ http
   .createServer(unifiedServer) // Pointfree notation
   // Starting the HTTPS server
   .listen(Config.httpPort, () =>
+    // eslint-disable-next-line no-console
     console.log(`The server is listening on port ${Config.httpPort}`)
   )
 
@@ -31,6 +32,7 @@ https
   .createServer(httpsServerOptions, unifiedServer) // Pointfree notation
   // Starting the HTTPS server
   .listen(Config.httpsPort, () =>
+    // eslint-disable-next-line no-console
     console.log(`The server is listening on port ${Config.httpsPort}`)
   )
 
