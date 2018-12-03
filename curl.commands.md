@@ -3,7 +3,7 @@
 ## Default endpoints
 
 - Ping
-  ```
+  ```sh
   curl\
     --header 'Content-Type: application/json'\
     localhost:3000/ping
@@ -12,7 +12,7 @@
 
 
 - Hello world
-  ```
+  ```sh
   curl\
     --header 'Content-Type: application/json'\
     --data '{}'\
@@ -21,7 +21,7 @@
   `< 200: {"msg":"Hello world!"}`
 
 - 404
-  ```
+  ```sh
     curl\
       --header 'Content-Type: application/json'\
       --data '{ "enjoying": "the course" }'\
@@ -34,7 +34,7 @@
 ### Users
 
   **POST** request
-  ```
+  ```sh
   curl\
    --header 'Content-Type: application/json'\
    --data '{"firstName":"Luis","lastName":"G","phone":"0123456789","password":"hello","tosAgreement":true}'\
@@ -49,7 +49,7 @@
   ```
 
   **GET** request
-  ```
+  ```sh
   curl\
    --header 'Content-Type: application/json'\
    localhost:3000/users?phone=0123456789
@@ -63,7 +63,7 @@
   ```
 
   **PUT** request
-  ```
+  ```sh
   curl\
    --request PUT\
    --header 'Content-Type: application/json'\
@@ -88,7 +88,7 @@
 ### Tokens
 
   **POST** request
-  ```
+  ```sh
   curl\
     --header 'Content-Type: application/json'\
     --data '{"firstName":"Luis","lastName":"G","phone":"0123456789","password":"hello","tosAgreement":true}'\
@@ -103,7 +103,7 @@
   ```
 
   **GET** request
-  ```
+  ```sh
   curl\
     --header 'Content-Type: application/json'\
     localhost:3000/tokens?id=8fvgomx7qqr05gbbeage
