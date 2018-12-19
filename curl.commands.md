@@ -4,8 +4,8 @@
 
 - Ping
   ```sh
-  curl\
-    --header 'Content-Type: application/json'\
+  curl \
+    --header 'Content-Type: application/json' \
     localhost:3000/ping
   ```
   `< 200: {}`
@@ -13,19 +13,19 @@
 
 - Hello world
   ```sh
-  curl\
-    --header 'Content-Type: application/json'\
-    --data '{}'\
+  curl \
+    --header 'Content-Type: application/json' \
+    --data '{}' \
     localhost:3000/hello
   ```
   `< 200: {"msg":"Hello world!"}`
 
 - 404
   ```sh
-    curl\
-      --header 'Content-Type: application/json'\
-      --data '{ "enjoying": "the course" }'\
-      localhost:3000/inexistent
+  curl \
+    --header 'Content-Type: application/json' \
+    --data '{ "enjoying": "the course" }' \
+    localhost:3000/inexistent
   ```
   `< 404: {}`
 
@@ -33,85 +33,106 @@
 
 ### Users
 
-  **POST** request
-  ```sh
-  curl\
-   --header 'Content-Type: application/json'\
-   --data '{"firstName":"Luis","lastName":"G","phone":"0123456789","password":"hello","tosAgreement":true}'\
-   localhost:3000/users
-  ```
-  ```
-  < 200: {
-    "firstName": "Luis",
-    "lastName": "G",
-    "phone": "0123456789",
-  }
-  ```
+**POST** request
+```sh
+curl \
+  --header 'Content-Type: application/json' \
+  --data '{"firstName":"Luis","lastName":"G","phone":"0123456789","password":"hello","tosAgreement":true}' \
+  localhost:3000/users
+```
+```
+< 200: {
+  "firstName": "Luis",
+  "lastName": "G",
+  "phone": "0123456789",
+}
+```
 
-  **GET** request
-  ```sh
-  curl\
-   --header 'Content-Type: application/json'\
-   localhost:3000/users?phone=0123456789
-  ```
-  ```
-  < 200: {
-    "firstName": "Luis",
-    "lastName": "G",
-    "phone": "0123456789",
-  }
-  ```
+**GET** request
+```sh
+curl \
+  --header 'Content-Type: application/json' \
+  --header 'token: $TOKEN' \
+  localhost:3000/users?phone=0123456789
+```
+```
+< 200: {
+  "firstName": "Luis",
+  "lastName": "G",
+  "phone": "0123456789",
+}
+```
 
-  **PUT** request
-  ```sh
-  curl\
-   --request PUT\
-   --header 'Content-Type: application/json'\
-   --data '{"lastName":"Garcia","phone": "0123456789"}'\
-   localhost:3000/users
-  ```
-  ```
-  < 200: {}
-  ```
+**PUT** request
+```sh
+curl \
+  --request PUT \
+  --header 'Content-Type: application/json' \
+  --header 'token: $TOKEN' \
+  --data '{"lastName":"Garcia","phone": "0123456789"}' \
+  localhost:3000/users
+```
+```
+< 200: {}
+```
 
-  **DELETE** request
-  ```
-  curl\
-   --request DELETE\
-   localhost:3000/users?phone=0123456789
-  ```
-  ```
-  < 200: {}
-  ```
-
+**DELETE** request
+```sh
+curl \
+  --request DELETE \
+  --header 'token: $TOKEN' \
+  localhost:3000/users?phone=0123456789
+```
+```
+< 200: {}
+```
 ---
 ### Tokens
 
-  **POST** request
-  ```sh
-  curl\
-    --header 'Content-Type: application/json'\
-    --data '{"firstName":"Luis","lastName":"G","phone":"0123456789","password":"hello","tosAgreement":true}'\
-    localhost:3000/tokens
-  ```
-  ```
-  < 200: {
-    "id":"8fvgomx7qqr05gbbeage",
-    "phone":"0123456789",
-    "expires":1543773407346
-  }
-  ```
+**POST** request
+```sh
+curl \
+  --header 'Content-Type: application/json' \
+  --data '{"phone":"0123456789","password":"hello"}' \
+  localhost:3000/tokens
+```
+```
+< 200: {
+  "id":"8fvgomx7qqr05gbbeage",
+  "phone":"0123456789",
+  "expires":1543773407346
+}
+```
 
-  **GET** request
-  ```sh
-  curl\
-    --header 'Content-Type: application/json'\
-    localhost:3000/tokens?id=8fvgomx7qqr05gbbeage
-  ```
-  ```
-  < 200: {
-    "id":"8fvgomx7qqr05gbbeage",
-    "phone":"0123456789",
-    "expires":1543773407346
-  }
-  ```
+**GET** request
+```sh
+curl \
+  --header 'Content-Type: application/json' \
+  localhost:3000/tokens?id=$TOKEN
+```
+```
+< 200: {
+  "id":"8fvgomx7qqr05gbbeage",
+  "phone":"0123456789",
+  "expires":1543773407346
+}
+```
+
+**PUT** request
+```sh
+curl \
+  --request PUT \
+  --header 'Content-Type: application/json' \
+  --data "{'id': '$TOKEN','extend': true}" \
+  localhost:3000/tokens
+```
+
+**DELETE** request
+```sh
+curl \
+  --request DELETE \
+  localhost:3000/tokens?id=$TOKEN
+```
+```
+< 200: {}
+```
