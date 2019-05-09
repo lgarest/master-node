@@ -1,46 +1,57 @@
 # Test the server with the following curl commands
 
+## ENV variables
+```bash
+export API=localhost:3000
+export TOKEN=3pvzourve7v8k8i2k6vv
+export PHONE=0121000000
+```
+
 ## Default endpoints
 
 - Ping
-  ```sh
+  ```bash
   curl \
     --header 'Content-Type: application/json' \
-    localhost:3000/ping
+    $API/ping
   ```
-  `< 200: {}`
+  ```js
+  < 200: {}
+  ```
 
 
 - Hello world
-  ```sh
+  ```bash
   curl \
     --header 'Content-Type: application/json' \
     --data '{}' \
-    localhost:3000/hello
+    $API/hello
   ```
   `< 200: {"msg":"Hello world!"}`
 
 - 404
-  ```sh
+  ```bash
   curl \
     --header 'Content-Type: application/json' \
     --data '{ "enjoying": "the course" }' \
-    localhost:3000/inexistent
+    $API/inexistent
   ```
-  `< 404: {}`
+  ```js
+  < 404: {}
+  ```
 
 ## REST endpoints
 
 ### Users
 
 **POST** request
-```sh
+```bash
 curl \
   --header 'Content-Type: application/json' \
-  --data '{"firstName":"Luis","lastName":"G","phone":"0123456789","password":"hello","tosAgreement":true}' \
-  localhost:3000/users
+  --data '{"firstName":"Edualdo","lastName":"El Goldo","phone":"0121000000","password":"hello","tosAgreement":true}' \
+  $API/users
 ```
-```
+```js
 < 200: {
   "firstName": "Luis",
   "lastName": "G",
@@ -49,13 +60,13 @@ curl \
 ```
 
 **GET** request
-```sh
+```bash
 curl \
   --header 'Content-Type: application/json' \
   --header 'token: $TOKEN' \
-  localhost:3000/users?phone=0123456789
+  $API/users?phone=0123456789
 ```
-```
+```js
 < 200: {
   "firstName": "Luis",
   "lastName": "G",
@@ -64,39 +75,39 @@ curl \
 ```
 
 **PUT** request
-```sh
+```bash
 curl \
   --request PUT \
   --header 'Content-Type: application/json' \
   --header 'token: $TOKEN' \
   --data '{"lastName":"Garcia","phone": "0123456789"}' \
-  localhost:3000/users
+  $API/users
 ```
-```
+```js
 < 200: {}
 ```
 
 **DELETE** request
-```sh
+```bash
 curl \
   --request DELETE \
   --header 'token: $TOKEN' \
-  localhost:3000/users?phone=0123456789
+  $API/users?phone=0123456789
 ```
-```
+```js
 < 200: {}
 ```
 ---
 ### Tokens
 
 **POST** request
-```sh
+```bash
 curl \
   --header 'Content-Type: application/json' \
   --data '{"phone":"0123456789","password":"hello"}' \
-  localhost:3000/tokens
+  $API/tokens
 ```
-```
+```js
 < 200: {
   "id":"8fvgomx7qqr05gbbeage",
   "phone":"0123456789",
@@ -105,12 +116,12 @@ curl \
 ```
 
 **GET** request
-```sh
+```bash
 curl \
   --header 'Content-Type: application/json' \
-  localhost:3000/tokens?id=$TOKEN
+  $API/tokens?id=$TOKEN
 ```
-```
+```js
 < 200: {
   "id":"8fvgomx7qqr05gbbeage",
   "phone":"0123456789",
@@ -119,20 +130,20 @@ curl \
 ```
 
 **PUT** request
-```sh
+```bash
 curl \
   --request PUT \
   --header 'Content-Type: application/json' \
   --data "{'id': '$TOKEN','extend': true}" \
-  localhost:3000/tokens
+  $API/tokens
 ```
 
 **DELETE** request
-```sh
+```bash
 curl \
   --request DELETE \
-  localhost:3000/tokens?id=$TOKEN
+  $API/tokens?id=$TOKEN
 ```
-```
+```js
 < 200: {}
 ```
