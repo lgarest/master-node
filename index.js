@@ -43,7 +43,8 @@ function unifiedServer(request, response) {
   const parseUrl = url.parse(request.url, true)
 
   // Get the trimmed path
-  const path = parseUrl.pathname
+  const path = parseUrl
+    .pathname
     .replace(/^\/+|\/+$/g, '') // Trim slashes at the end and the begining
 
   // Get the payload, if any
@@ -72,8 +73,10 @@ function unifiedServer(request, response) {
 }
 
 // Connect the urls with the views handling the request
-Router.url('hello', Handlers.hello)
-Router.url('ping', Handlers.ping)
-Router.url('users', Handlers.users)
-Router.url('tokens', Handlers.tokens)
-Router.url('404', Handlers.notFound)
+[
+  ['hello', Handlers.hello],
+  ['ping', Handlers.ping],
+  ['users', Handlers.users],
+  ['tokens', Handlers.tokens],
+  ['404', Handlers.notFound],
+].forEach(([url, handler]) => Router.url(url, handler))
