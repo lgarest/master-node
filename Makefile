@@ -1,4 +1,5 @@
 default:
+	@echo 'make start		-- to start the server'
 	@echo 'make lint		-- to lint the code'
 	@echo 'make clean		-- to freshly start'
 
@@ -14,3 +15,7 @@ lint:
 		./lib/**/* \
 		--config .eslintrc.yml
 	@echo 'Success :)'
+
+start:
+	@echo 'Starting the server...'
+	@node index.js
