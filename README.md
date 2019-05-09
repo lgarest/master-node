@@ -22,3 +22,5 @@ Check the [curl command's file](./curl.commands.md) for consuming the API.
 - [x] 1. It should be a RESTful JSON API that listens on a port of your choice.
 
 - [x] 2. When someone posts anything to the route /hello, you should return a welcome message, in JSON format. This message can be anything you want.
+
+This should be a 0 dependencies project although I'm using eslint to lint my code.
